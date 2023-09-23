@@ -4,7 +4,8 @@ import clsx from "clsx";
 import Link from "next/link";
 import React, { AnchorHTMLAttributes } from "react";
 
-interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   color?: "default" | "info" | "success" | "warning" | "error";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
   className?: string;
@@ -19,16 +20,20 @@ const Button: React.FC<ButtonProps> = ({
   className,
   href,
   children,
-  onClick = () => {},
+  onClick,
   ...rest
 }) => {
+  const handleClick = () => {
+    onClick && onClick();
+  };
+
   const btnClassNames = clsx(
     "transition duration-150 ease-in-out rounded",
     {
-      "bg-blue-500 hover:bg-blue-700 text-white": color === "info",
-      "bg-green-500 hover:bg-green-700 text-white": color === "success",
-      "bg-yellow-500 hover:bg-yellow-700 text-white": color === "warning",
-      "bg-red-500 hover:bg-red-700 text-white": color === "error",
+      "bg-blue-500 hover:bg-blue-400 text-white": color === "info",
+      "bg-green-500 hover:bg-green-400 text-white": color === "success",
+      "bg-yellow-500 hover:bg-yellow-400 text-white": color === "warning",
+      "bg-red-500 hover:bg-red-400 text-white": color === "error",
       "py-1 px-2 text-xs": size === "xs",
       "py-1 px-3 text-sm": size === "sm",
       "py-2 px-4 text-md": size === "md",
@@ -47,10 +52,10 @@ const Button: React.FC<ButtonProps> = ({
       {children}
     </Link>
   ) : (
-    <button className={btnClassNames} onClick={onClick} {...rest}>
+    <button className={btnClassNames} onClick={handleClick} {...rest}>
       {children}
     </button>
   );
 };
 
-export default Button;
+export default React.memo(Button);
