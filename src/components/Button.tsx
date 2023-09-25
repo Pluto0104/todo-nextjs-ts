@@ -3,6 +3,7 @@
 import clsx from "clsx";
 import Link from "next/link";
 import React, { AnchorHTMLAttributes } from "react";
+import { getBgColor, getTextSize } from "@/utils/Theme";
 
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -28,17 +29,15 @@ const Button: React.FC<ButtonProps> = ({
   };
 
   const btnClassNames = clsx(
-    "transition duration-150 ease-in-out rounded",
+    "transition duration-150 ease-in-out rounded text-white",
     {
-      "bg-blue-500 hover:bg-blue-400 text-white": color === "info",
-      "bg-green-500 hover:bg-green-400 text-white": color === "success",
-      "bg-yellow-500 hover:bg-yellow-400 text-white": color === "warning",
-      "bg-red-500 hover:bg-red-400 text-white": color === "error",
-      "py-1 px-2 text-xs": size === "xs",
-      "py-1 px-3 text-sm": size === "sm",
-      "py-2 px-4 text-md": size === "md",
-      "py-3 px-5 text-lg": size === "lg",
-      "py-4 px-6 text-xl": size === "xl",
+      ...getBgColor(color, true),
+      ...getTextSize(size),
+      "py-1 px-2": size === "xs",
+      "py-1 px-3": size === "sm",
+      "py-2 px-4": size === "md",
+      "py-3 px-5": size === "lg",
+      "py-4 px-6": size === "xl",
     },
     className
   );
