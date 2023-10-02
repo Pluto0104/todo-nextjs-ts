@@ -14,5 +14,6 @@ export const POST = async (request: Request, response: Response) => {
     return NextResponse.json({ code: 200, message: "A new todo is created." });
   } catch (error) {
     console.error(error);
+    return NextResponse.json({ code: 500, message: "Internal Server Error" });
   }
 };

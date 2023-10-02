@@ -19,7 +19,7 @@ const TodoList = () => {
 
   React.useEffect(() => {
     loadTodoList();
-  }, []);
+  }, [loadTodoList]);
   return (
     <>
       {todos.map(({ id, title, description, ...rest }) => (
