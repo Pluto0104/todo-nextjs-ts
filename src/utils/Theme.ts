@@ -27,7 +27,7 @@ export const getBgColor = (color: string, hoverable?: boolean) => ({
 });
 
 export const getTextColor = (color: string) => ({
-  "text-gray-300 ": color === "default",
+  "text-gray-300": color === "default",
   "text-blue-500": color === "info",
   "text-green-500": color === "success",
   "text-yellow-500": color === "warning",
