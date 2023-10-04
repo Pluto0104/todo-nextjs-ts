@@ -39,7 +39,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
           type="checkbox"
           checked={isChecked}
           onChange={handleChecked}
-          className="form-checkbox h-5 w-5 text-indigo-600 transition duration-150 ease-in-out bg-red-500 focus:outline-none focus:shadow-outline-red"
+          className="form-checkbox rounded-full h-5 w-5 text-indigo-600 transition duration-150 ease-in-out bg-red-500 focus:outline-none focus:shadow-outline-red"
         />
         <div className="ml-2">
           <p className={clsx("text-white-800", { "line-through": isChecked })}>
@@ -54,11 +54,16 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
           </p>
         </div>
       </div>
-      {onDelete && (
-        <Button color="error" onClick={handleDelete}>
-          Delete
+      <div>
+        <Button color="success" href={`/todo/${id}`} className="mr-2">
+          Edit
         </Button>
-      )}
+        {onDelete && (
+          <Button color="error" onClick={handleDelete}>
+            Delete
+          </Button>
+        )}
+      </div>
     </div>
   );
 };
