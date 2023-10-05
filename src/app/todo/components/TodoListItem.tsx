@@ -1,5 +1,3 @@
-"use client";
-
 import React from "react";
 import Button from "@/components/Button";
 import clsx from "clsx";
@@ -9,7 +7,7 @@ interface TodoListItemProps {
   title?: string;
   description?: string;
   isCompleted?: boolean;
-  onCompleted?: (id: string) => void;
+  onCompleted?: (id: string, isCompleted: boolean) => void;
   onDelete?: (id: string) => void;
 }
 
@@ -29,7 +27,7 @@ const TodoListItem: React.FC<TodoListItemProps> = ({
 
   const handleChecked: React.ChangeEventHandler<HTMLInputElement> = (e) => {
     setIsChecked(e.target.checked);
-    onCompleted && onCompleted(id);
+    onCompleted && onCompleted(id, e.target.checked);
   };
 
   return (
