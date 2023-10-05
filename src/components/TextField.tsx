@@ -1,8 +1,5 @@
-"use client";
-
 import clsx from "clsx";
 import React from "react";
-import { UseFormRegister } from "react-hook-form";
 import { getTextColor, getBorderColor, getTextSize } from "@/utils/Theme";
 
 export interface TextFieldProps
@@ -15,11 +12,7 @@ export interface TextFieldProps
   error?: boolean;
   color?: "success" | "error" | "warning" | "info" | "default";
   size?: "xs" | "sm" | "md" | "lg" | "xl";
-  defaultValue?: string | number;
   value?: string | number;
-  register?: UseFormRegister<any>;
-  required?: boolean;
-  onChange?: (value: string | number) => void;
 }
 
 const TextField: React.FC<TextFieldProps> = ({
@@ -27,19 +20,10 @@ const TextField: React.FC<TextFieldProps> = ({
   helperText = "",
   color = "default",
   size = "md",
-  defaultValue,
-  value,
   error,
-  required,
-  register,
-  onChange,
   ...rest
 }) => {
   if (error) color = "error";
-
-  const handleChange: React.ChangeEventHandler<HTMLInputElement> = (e) => {
-    onChange && onChange(e.target.value);
-  };
 
   return (
     <div className="flex flex-col">
@@ -73,16 +57,6 @@ const TextField: React.FC<TextFieldProps> = ({
               ...getBorderColor(color, true),
             }
           )}
-          defaultValue={defaultValue}
-          value={value}
-          {...(register
-            ? register(rest.name || label, {
-                required: {
-                  value: !!required,
-                  message: `${label} is required.`,
-                },
-              })
-            : { onChange: handleChange })}
           {...rest}
         />
       </div>

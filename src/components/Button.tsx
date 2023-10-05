@@ -1,5 +1,3 @@
-"use client";
-
 import clsx from "clsx";
 import Link from "next/link";
 import React, { AnchorHTMLAttributes } from "react";
@@ -12,7 +10,6 @@ export interface ButtonProps
   className?: string;
   href?: string;
   children: React.ReactNode;
-  onClick?: VoidFunction;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -21,13 +18,8 @@ const Button: React.FC<ButtonProps> = ({
   className,
   href,
   children,
-  onClick,
   ...rest
 }) => {
-  const handleClick = () => {
-    onClick && onClick();
-  };
-
   const btnClassNames = clsx(
     "transition duration-150 ease-in-out rounded text-white",
     {
@@ -51,7 +43,7 @@ const Button: React.FC<ButtonProps> = ({
       {children}
     </Link>
   ) : (
-    <button className={btnClassNames} onClick={handleClick} {...rest}>
+    <button className={btnClassNames} {...rest}>
       {children}
     </button>
   );
